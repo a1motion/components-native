@@ -37,6 +37,7 @@ const Text: React.FC<TextProps & React.ComponentProps<typeof RNText>> = ({ style
           fontSize: fontSizes[type],
           fontWeight: fontWeights[type],
           marginBottom: 1,
+          fontFamily: theme.TextFontFamily,
         },
         style
       )}

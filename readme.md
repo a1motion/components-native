@@ -3,7 +3,7 @@
 ## Install
 
 ```shell
-yarn add @a1motion/components-native react-native-appearance react-native-safe-area-context
+yarn add @a1motion/components-native react-native-appearance react-native-safe-area-context @react-native-community/datetimepicker
 ```
 
 ## Setup

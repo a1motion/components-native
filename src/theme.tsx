@@ -23,6 +23,7 @@ type Theme = {
   DangerColors: ColorArray;
   SuccessColor: string;
   SuccessColors: ColorArray;
+  TextFontFamily?: string;
 };
 
 const lightBasicColors = [
@@ -132,9 +133,15 @@ export const theme = {
   dark: Theme;
 };
 export const ThemeContext = React.createContext(theme.light);
-export const ThemeProvider: React.FC = ({ children }) => {
+export const ThemeProvider: React.FC<{
+  theme: Partial<Theme>;
+}> = ({ children, theme: userTheme }) => {
   const scheme = useColorScheme();
-  return <ThemeContext.Provider value={scheme === "dark" ? theme.dark : theme.light}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeContext.Provider value={Object.assign({}, scheme === "dark" ? theme.dark : theme.light, userTheme)}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
 
 export const useTheme = () => {
