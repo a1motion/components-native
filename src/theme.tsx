@@ -134,7 +134,7 @@ export const theme = {
 };
 export const ThemeContext = React.createContext(theme.light);
 export const ThemeProvider: React.FC<{
-  theme: Partial<Theme>;
+  theme?: Partial<Theme>;
 }> = ({ children, theme: userTheme }) => {
   const scheme = useColorScheme();
   return (
