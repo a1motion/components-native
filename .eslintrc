@@ -1,0 +1,19 @@
+{
+  "extends": "a1motion/typescript-react",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "createDefaultProgram": true
+  },
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "prettier/prettier": ["error", {
+      "trailingComma": "es5",
+      "printWidth": 120,
+      "semi": true,
+      "jsxBracketSameLine": true,
+      "arrowParens": "always",
+      "endOfLine": "lf"
+    }]
+  }
+}
