@@ -7,6 +7,7 @@ import { useColorScheme } from "react-native-appearance";
 type ColorArray = [undefined, string, string, string, string, string, string, string, string, string, string];
 
 type Theme = {
+  ColorScheme: "dark" | "light";
   LayoutBackgroundColor: string;
   CardBackgroundColor: string;
   PrimaryColor: string;
@@ -24,6 +25,7 @@ type Theme = {
   SuccessColor: string;
   SuccessColors: ColorArray;
   TextFontFamily?: string;
+  SubTextColor?: string;
 };
 
 const lightBasicColors = [
@@ -96,10 +98,12 @@ const _theme = {
     SuccessColors: successColors,
   },
   light: {
+    ColorScheme: "light",
     LayoutBackgroundColor: "rgb(242, 242, 242)",
     CardBackgroundColor: "rgb(255, 255, 255)",
     TabBarInactiveColor: "rgb(2, 2, 2)",
     TextColor: "rgb(14, 14, 15)",
+    SubTextColor: lightBasicColors[8],
     ButtonPressColor: "rgb(20, 20, 20)",
     InputBorderColor: "rgb(217, 217, 217)",
     ButtonControlColor: "#F8F8F8",
@@ -107,10 +111,12 @@ const _theme = {
     BasicColors: [undefined, ...lightBasicColors],
   },
   dark: {
+    ColorScheme: "dark",
     LayoutBackgroundColor: "rgb(3, 3, 3)",
     CardBackgroundColor: "rgb(22, 22, 22)",
     TabBarInactiveColor: "rgb(225, 225, 225)",
     TextColor: "rgb(229, 229, 231)",
+    SubTextColor: darkBasicColors[5],
     ButtonPressColor: "rgb(255, 255, 255)",
     InputBorderColor: "rgb(117, 117, 117)",
     ButtonControlColor: "#222222",
