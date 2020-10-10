@@ -121,7 +121,13 @@ const DatePicker: React.FC<DateTimePickerProps> = ({ value, onChange, mode, capt
           minute: "numeric",
         });
       case "datetime":
-        return value.toLocaleString(undefined);
+        return value.toLocaleString(undefined, {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+        });
       default:
         throw new Error("Unreachable");
     }

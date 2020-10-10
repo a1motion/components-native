@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+// @ts-ignore
 import { useColorScheme } from "react-native-appearance";
 
 // To provide consistency between these components and the web ones,
