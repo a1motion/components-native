@@ -60,6 +60,11 @@ const ButtonGroupButtonStyles = StyleSheet.create({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
   },
+  horizontalFirst: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+    marginRight: 0,
+  },
   verticalItem: {
     marginBottom: 0,
     marginTop: 0,
@@ -71,6 +76,11 @@ const ButtonGroupButtonStyles = StyleSheet.create({
     borderTopRightRadius: 0,
     borderTopWidth: 0,
     marginTop: 0,
+  },
+  horizontalLast: {
+    marginRight: 0,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
   },
 });
 
@@ -84,11 +94,15 @@ export const ButtonGroupButton: React.FC<ButtonProps> = ({ style, ...props }: Bu
     }
 
     if (index === 0) {
-      styles.push(direction === "vertical" ? ButtonGroupButtonStyles.verticalFirst : null);
+      styles.push(
+        direction === "vertical" ? ButtonGroupButtonStyles.verticalFirst : ButtonGroupButtonStyles.horizontalFirst
+      );
     } else if (index === total - 1) {
-      styles.push(direction === "vertical" ? ButtonGroupButtonStyles.verticalLast : null);
+      styles.push(ButtonGroupButtonStyles.verticalLast);
     } else {
-      styles.push(direction === "vertical" ? ButtonGroupButtonStyles.verticalItem : null);
+      styles.push(
+        direction === "vertical" ? ButtonGroupButtonStyles.verticalItem : ButtonGroupButtonStyles.horizontalLast
+      );
     }
 
     return styles;
