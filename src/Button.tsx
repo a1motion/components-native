@@ -14,7 +14,7 @@ import { useTheme } from "./theme";
 export type ButtonProps = PressableProps & {
   status?: "default" | "primary" | "danger" | "control";
   animated?: boolean;
-  containerStyles?: ViewProps;
+  containerStyles?: ViewProps["style"];
 };
 
 const styles = StyleSheet.create({
