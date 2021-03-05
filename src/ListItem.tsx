@@ -24,7 +24,7 @@ const ListItem: React.FC<ListItemProps> = ({ children, onPress, ...props }) => {
         styles.container,
         { backgroundColor: pressed ? theme.BasicColors[1] : theme.CardBackgroundColor },
       ]}>
-      <SafeAreaView forceInset={{ horizontal: "always" }} {...props}>
+      <SafeAreaView forceInset={{ horizontal: "always", vertical: "never" }} {...props}>
         {children}
       </SafeAreaView>
     </Pressable>
