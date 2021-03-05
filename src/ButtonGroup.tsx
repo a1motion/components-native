@@ -84,7 +84,7 @@ const ButtonGroupButtonStyles = StyleSheet.create({
     marginTop: 0,
   },
   horizontalLast: {
-    marginRight: 0,
+    marginLeft: 0,
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
     borderLeftWidth: 0,
