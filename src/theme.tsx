@@ -154,3 +154,12 @@ export const ThemeProvider: React.FC<{
 export const useTheme = () => {
   return useContext(ThemeContext);
 };
+
+export const withTheme = <P extends any>(Component: React.ComponentType<P>) =>
+  // eslint-disable-next-line react/prefer-stateless-function
+  class WithTheme extends React.Component<P> {
+    static contextType = ThemeContext;
+    render() {
+      return <Component theme={this.context} {...this.props} />;
+    }
+  };
