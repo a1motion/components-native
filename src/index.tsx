@@ -6,4 +6,4 @@ export { default as ListItem } from "./ListItem";
 export { default as SelectableMenu } from "./SelectableMenu";
 export { default as TabBar } from "./TabBar";
 export { default as Text, AnimatedText } from "./Text";
-export { ThemeProvider, ThemeContext, useTheme, theme } from "./theme";
+export { ThemeProvider, ThemeContext, useTheme, withTheme, theme } from "./theme";
