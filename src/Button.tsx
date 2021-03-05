@@ -1,11 +1,20 @@
 import React, { useCallback, useMemo, useRef } from "react";
-import { Pressable, PressableProps, StyleSheet, Animated, TouchableOpacity, TouchableOpacityProps } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Animated,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ViewProps,
+} from "react-native";
 import Text from "./Text";
 import { useTheme } from "./theme";
 
 export type ButtonProps = PressableProps & {
   status?: "default" | "primary" | "danger" | "control";
   animated?: boolean;
+  containerStyles?: ViewProps;
 };
 
 const styles = StyleSheet.create({
@@ -29,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
   onPressIn,
   onPressOut,
   status,
+  containerStyles,
   ...props
 }) => {
   const theme = useTheme();
@@ -82,7 +92,7 @@ const Button: React.FC<ButtonProps> = ({
     return theme.TextColor;
   }, [theme, status]);
   return (
-    <Animated.View style={{ alignSelf: "stretch", transform: [{ scale }] }}>
+    <Animated.View style={[{ alignSelf: "stretch", transform: [{ scale }] }, containerStyles]}>
       <Pressable
         onPressIn={_onPressIn}
         onPressOut={_onPressOut}
