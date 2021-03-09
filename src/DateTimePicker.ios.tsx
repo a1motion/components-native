@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Platform, TextInput, Modal, View, StyleSheet, Animated, TouchableWithoutFeedback } from "react-native";
-import InternalDateTimePicker, { DatePickerOptions } from "@react-native-community/datetimepicker";
+import InternalDateTimePicker, {
+  AndroidNativeProps,
+  IOSNativeProps,
+  WindowsNativeProps,
+} from "@react-native-community/datetimepicker";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Input from "./Input";
 import { useTheme } from "./theme";
+import { DateTimePickerProps } from "./DateTimePicker";
+import useKeyboardHeight from "./utils/useKeyboardHeight";
 
-export type DateTimePickerProps = {
-  value: Date;
-  onChange: (date: Date) => void;
-  mode: "date" | "datetime" | "time";
-  caption?: string;
-  hideCaption?: boolean;
-};
+export type { DateTimePickerProps };
 
 // For iOS we take two different paths for rendering out the DatePicker.
 // If the user is on iOS 14 or higher, we inline the native date picker.
@@ -23,7 +23,7 @@ export type DateTimePickerProps = {
 
 const IOS_VERSION = Number.parseInt(Platform.Version as string, 10);
 
-type DateTimePickerModalProps = DatePickerOptions & {
+type DateTimePickerModalProps = (IOSNativeProps | AndroidNativeProps | WindowsNativeProps) & {
   onClose: () => void;
   visible: boolean;
   mode: DateTimePickerProps["mode"];
@@ -34,7 +34,8 @@ const DatePickerModal: React.FC<DateTimePickerModalProps> = ({ visible, value, o
   const viewTransform = useRef(new Animated.Value(visible ? 1 : 0)).current;
   const theme = useTheme();
   const insets = useSafeAreaInsets();
-  const height = (IOS_VERSION >= 14 && mode === "date" ? 368 : 220) + insets.bottom;
+  const keyboardHeight = useKeyboardHeight();
+  const height = (IOS_VERSION >= 14 && mode === "date" ? 368 : mode === "datetime" ? 438 : 220) + insets.bottom;
   useEffect(() => {
     if (visible) {
       _setVisible(true);
@@ -48,6 +49,7 @@ const DatePickerModal: React.FC<DateTimePickerModalProps> = ({ visible, value, o
       });
     }
   }, [visible]);
+
   return (
     <Modal
       transparent
@@ -70,6 +72,7 @@ const DatePickerModal: React.FC<DateTimePickerModalProps> = ({ visible, value, o
             left: 0,
             right: 0,
             height,
+            paddingTop: 16,
             paddingBottom: insets.bottom,
             backgroundColor: theme.CardBackgroundColor,
             transform: [
@@ -80,11 +83,12 @@ const DatePickerModal: React.FC<DateTimePickerModalProps> = ({ visible, value, o
                 }),
               },
             ],
+            marginBottom: keyboardHeight,
           }}>
           <InternalDateTimePicker
             value={value}
             onChange={onChange}
-            display={mode === "date" ? "inline" : "spinner"}
+            display={mode === "date" || mode === "datetime" ? "inline" : "spinner"}
             mode={mode}
           />
         </Animated.View>
@@ -93,13 +97,14 @@ const DatePickerModal: React.FC<DateTimePickerModalProps> = ({ visible, value, o
   );
 };
 
-const DatePicker: React.FC<DateTimePickerProps> = ({ value, onChange, mode, caption, hideCaption }) => {
-  const _onChange = useCallback(
-    (_, e) => {
-      onChange?.(e);
-    },
-    [onChange]
-  );
+const DatePicker: React.FC<DateTimePickerProps> = ({
+  value,
+  onChange,
+  mode,
+  caption,
+  hideCaption,
+  inputProps = {},
+}) => {
   const [modalShown, setModalShown] = useState(false);
   const inputRef = useRef<TextInput>(null);
   const onInputFocus = useCallback(() => {
@@ -137,12 +142,19 @@ const DatePicker: React.FC<DateTimePickerProps> = ({ value, onChange, mode, capt
     <>
       <DatePickerModal
         value={value}
-        onChange={_onChange}
+        onChange={onChange}
         onClose={() => setModalShown(false)}
         visible={modalShown}
         mode={mode}
       />
-      <Input onFocus={onInputFocus} ref={inputRef} value={renderText} caption={caption} hideCaption={hideCaption} />
+      <Input
+        {...inputProps}
+        onFocus={onInputFocus}
+        ref={inputRef}
+        value={renderText}
+        caption={caption}
+        hideCaption={hideCaption}
+      />
     </>
   );
 };
