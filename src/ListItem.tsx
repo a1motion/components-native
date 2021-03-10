@@ -4,7 +4,7 @@ import SafeAreaView from "react-native-safe-area-view";
 import { useTheme } from "./theme";
 
 type ListItemProps = ViewProps & {
-  onPress: PressableProps["onPress"];
+  onPress?: PressableProps["onPress"];
 };
 
 const ListItem: React.FC<ListItemProps> = ({ children, onPress, ...props }) => {

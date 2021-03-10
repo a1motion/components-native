@@ -108,7 +108,7 @@ const _theme = {
     ButtonPressColor: "rgb(20, 20, 20)",
     InputBorderColor: "rgb(217, 217, 217)",
     ButtonControlColor: "#F8F8F8",
-    BasicBorderColor: "#c3c3c3",
+    BasicBorderColor: "rgb(216, 216, 216)",
     BasicColors: [undefined, ...lightBasicColors],
   },
   dark: {
@@ -121,7 +121,7 @@ const _theme = {
     ButtonPressColor: "rgb(255, 255, 255)",
     InputBorderColor: "rgb(117, 117, 117)",
     ButtonControlColor: "#222222",
-    BasicBorderColor: "rgb(216, 216, 216)",
+    BasicBorderColor: "rgb(39, 39, 41)",
     BasicColors: [undefined, ...darkBasicColors],
   },
 };
