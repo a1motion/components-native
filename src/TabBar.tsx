@@ -294,18 +294,23 @@ const VerticalTabBarItem: React.FC<TabBarItemProps> = ({ route, isFocused, descr
   );
 };
 
-const TabBarItem: React.FC<TabBarItemProps> = (props) => {
+const TabBarItem: React.FC<TabBarItemProps & { isTablet?: boolean }> = ({ isTablet = false, ...props }) => {
   const { width, height } = useWindowDimensions();
   const isLandscape = width > height;
 
-  if (isLandscape) {
+  if (isLandscape || isTablet) {
     return <HorizontalTabBarItem {...props} />;
   }
 
   return <VerticalTabBarItem {...props} />;
 };
 
-const InternalTabBar: React.FC<BottomTabBarProps> = ({ descriptors, state, navigation }) => {
+const InternalTabBar: React.FC<BottomTabBarProps & { isTablet?: boolean }> = ({
+  descriptors,
+  state,
+  navigation,
+  isTablet,
+}) => {
   const theme = useTheme();
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   if (focusedOptions.tabBarVisible === false) {
@@ -333,6 +338,7 @@ const InternalTabBar: React.FC<BottomTabBarProps> = ({ descriptors, state, navig
             descriptor={descriptors[route.key]}
             isFocused={isFocused}
             navigation={navigation}
+            isTablet={isTablet}
           />
         );
       })}
@@ -340,7 +346,7 @@ const InternalTabBar: React.FC<BottomTabBarProps> = ({ descriptors, state, navig
   );
 };
 
-const TabBar = (props: BottomTabBarProps) => {
+const TabBar = (props: BottomTabBarProps & { isTablet?: boolean }) => {
   return <InternalTabBar {...props} />;
 };
 
