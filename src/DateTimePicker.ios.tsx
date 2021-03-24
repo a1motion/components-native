@@ -1,10 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Platform, TextInput, Modal, View, StyleSheet, Animated, TouchableWithoutFeedback } from "react-native";
-import InternalDateTimePicker, {
-  AndroidNativeProps,
-  IOSNativeProps,
-  WindowsNativeProps,
-} from "@react-native-community/datetimepicker";
+import InternalDateTimePicker, { IOSNativeProps } from "@react-native-community/datetimepicker";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Input from "./Input";
 import { useTheme } from "./theme";
@@ -23,7 +19,7 @@ export type { DateTimePickerProps };
 
 const IOS_VERSION = Number.parseInt(Platform.Version as string, 10);
 
-type DateTimePickerModalProps = (IOSNativeProps | AndroidNativeProps | WindowsNativeProps) & {
+type DateTimePickerModalProps = IOSNativeProps & {
   onClose: () => void;
   visible: boolean;
   mode: DateTimePickerProps["mode"];

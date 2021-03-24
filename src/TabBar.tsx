@@ -327,6 +327,7 @@ const InternalTabBar: React.FC<BottomTabBarProps & { isTablet?: boolean }> = ({
         borderTopColor: theme.BasicBorderColor,
         borderTopWidth: 1,
         borderStyle: "solid",
+        marginBottom: 4,
       }}>
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
